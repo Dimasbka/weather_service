@@ -51,6 +51,7 @@ coverage.xml
 .pytest_cache/
 cover/
 
+
 # Translations
 *.mo
 *.pot
@@ -74,6 +75,8 @@ docs/_build/
 # PyBuilder
 .pybuilder/
 target/
+
+
 
 # Jupyter Notebook
 .ipynb_checkpoints
@@ -158,3 +161,13 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+
+# PyDev project settings
+.pydevproject 
+.project
+*.exe
+
+/.pydevproject
+migrations/
+
