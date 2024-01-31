@@ -34,7 +34,8 @@
 BOT Commands : `/start` отображение начального меню
 
 Пример:
-(https://raw.githubusercontent.com/Dimasbka/weather_service/main/bot_screenshot.png)
+<img src="[https://www.herokucdn.com/deploy/button.svg](https://raw.githubusercontent.com/Dimasbka/weather_service/main/bot_screenshot.png)" alt="пример окна бота"/>
+
 
 
 # Процесс установки и настройки
