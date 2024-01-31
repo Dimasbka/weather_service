@@ -81,10 +81,7 @@ def weather(message: telebot.types.Message):
             )
             return
 
-        data = get_yandex_weather(
-                city.name, 
-                (city.latitude, city.longitude) 
-            )
+        data = get_yandex_weather( (city.latitude, city.longitude) )
 
         text =  f"Погода в городе {city.name}:\n\n" \
                 f"температура {data['temp']}℃\n" \

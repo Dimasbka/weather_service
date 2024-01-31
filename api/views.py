@@ -1,21 +1,16 @@
 import asyncio
+import json
+
 from django.views import View
 from django.http import JsonResponse, HttpResponse
-import json
 from django.core.serializers.json import DjangoJSONEncoder
-
 from django.core.cache import cache
-from django.conf import settings
+
 from geo.models import City
-
-
-
 from geo.yandex_weather import get_yandex_weather_async
 
-# YANDEX_API_CACHE_TIME     = getattr( settings, 'YANDEX_API_CACHE_TIME', 60 )
 
-
-# класс для корректной работы с руским языком в json и статусами ответов 
+# классы для корректной работы с руским языком в json 
 class UTF8JsonResponse(JsonResponse):
     def __init__(self, *args, json_dumps_params=None, **kwargs):
         json_dumps_params = {"ensure_ascii": False, **(json_dumps_params or {})}
@@ -26,7 +21,6 @@ class JsonResponseBadRequest(UTF8JsonResponse):
 
 class JsonResponseNotFound(UTF8JsonResponse):
     status_code = 404
-
 
 
 class CityWeather(View):
@@ -43,14 +37,12 @@ class CityWeather(View):
         city_name = request.GET['city']
 
         city = await City.objects.filter( name__iexact=city_name ).afirst()
+
         if city == None:
             return JsonResponseNotFound({
                 'error':f"Город '{city}' не найден"
             })
 
-        data = await get_yandex_weather_async(
-                city.name, 
-                (city.latitude, city.longitude) 
-            )
+        data = await get_yandex_weather_async( (city.latitude, city.longitude) )
 
         return JsonResponse(data)
